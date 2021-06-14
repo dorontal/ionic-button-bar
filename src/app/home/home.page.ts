@@ -20,6 +20,7 @@ export class HomePage implements OnInit {
         {
             text: 'Tab 2',
             leftIcon: 'ellipse',
+            rightIcon: 'square',
             clickCB: (): void => { this.message = 'Last click = Tab 2'; }
         },
         {

@@ -1,19 +1,27 @@
-div {
-    display: inline-block;
+ion-grid {
+    border-top: solid 1px var(--ion-color-medium);
+    margin: 0;
+    padding: 0;
     text-align: center;
-
-    ion-button.active span {
-        color: var(--ion-color-primary);
-    }
-    ion-button.inactive span {
-        color: var(--ion-color-medium);
-    }
-    ion-button span {
-        font-size: 60%;
-        text-transform: none;
-        ion-icon {
-            // margin-bottom = height between icons and text below them
-            font-size: 300%;
+    ion-row, ion-col {
+        margin: 0;
+        padding: 0;
+        ion-button.active span {
+            color: var(--ion-color-primary);
+        }
+        ion-button.inactive span {
+            color: var(--ion-color-medium);
+        }
+        ion-button {
+            margin: 0;
+            margin-top: 2px;
+            span {
+                font-size: 10px;
+                text-transform: none;
+                ion-icon {
+                    font-size: 30px;
+                }
+            }
         }
     }
 }
