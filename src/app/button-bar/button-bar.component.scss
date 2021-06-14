@@ -1,0 +1,19 @@
+div {
+    display: inline-block;
+    text-align: center;
+
+    ion-button.active span {
+        color: var(--ion-color-primary);
+    }
+    ion-button.inactive span {
+        color: var(--ion-color-medium);
+    }
+    ion-button span {
+        font-size: 60%;
+        text-transform: none;
+        ion-icon {
+            // margin-bottom = height between icons and text below them
+            font-size: 300%;
+        }
+    }
+}

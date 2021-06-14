@@ -1,0 +1,30 @@
+<!-- <div> is a hack bec button inside shadow DOM of ion-button
+     was not centered. So we put the entire ion-button list in
+     a div and we put a text-align:center style on the div to fix this
+     but later check if that bug is fixed and we can get rid of this div
+     and put the [style.width]="buttonWidth" on the ion-button again
+     also then put the *ngFor on the ion-button again
+
+    <ion-button [ngClass]="button.active ? 'active' : 'inactive'"
+                fill="clear"  expand="full" (click)="button.clickCB()"
+                ...
+
+  -->
+<div [style.width]="buttonWidth" *ngFor="let button of buttons">
+    <ion-button [ngClass]="button.active ? 'active' : 'inactive'"
+                fill="clear"  expand="full" (click)="commonCB(button)"
+                [disabled]="button.disabledCB && button.disabledCB()">
+        <span>
+            <ion-icon *ngIf="button.leftIcon"
+                      [name]="button.leftIcon"></ion-icon>
+            <ion-icon *ngIf="button.leftIconSrc"
+                      [src]="button.leftIconSrc"></ion-icon>
+            <ion-icon *ngIf="button.rightIcon"
+                      [name]="button.rightIcon"></ion-icon>
+            <ion-icon *ngIf="button.rightIconSrc"
+                      [src]="button.rightIconSrc"></ion-icon>
+            <br>
+            {{button.text}}
+        </span>
+    </ion-button>
+</div>
