@@ -1,4 +1,6 @@
+
 ion-grid {
+    border-top: 1px solid var(--ion-tab-bar-border-color, var(--ion-border-color, var(--ion-color-step-150, rgba(0, 0, 0, 0.2))));
     max-width: 500px;
 }
 
@@ -14,6 +16,9 @@ ion-grid.ios {
         }
         ion-button.inactive span {
             color: #999;
+            .button-inner {
+                width: 100%;
+            }
         }
         ion-button {
             margin: 0;
@@ -54,7 +59,7 @@ ion-grid.md {
             color: var(--ion-color-primary);
         }
         ion-button.inactive span {
-            color: #999;
+            color: #666;
         }
         ion-button {
             margin: 0;
