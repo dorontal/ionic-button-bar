@@ -1,11 +1,12 @@
 import { OnChanges, SimpleChanges, Component, Input } from '@angular/core';
 
 export interface ButtonBarButton {
-    leftIcon?: string;
+    icon?: string;
     rightIcon?: string;
-    leftIconSrc?: string;
+    iconSrc?: string;
     rightIconSrc?: string;
     active?: boolean;
+    default?: boolean;
     text: string;
     clickCB?: () => void;
     disabledCB?: () => boolean;
@@ -31,27 +32,37 @@ export class ButtonBarComponent implements OnChanges {
     public ngOnChanges(changes: SimpleChanges): void {
         if (changes.buttons && this.buttons) {
             this.buttonWidth = (100 / this.buttons.length).toString() + '%';
+            let foundDefault: boolean = false;
             this.buttons.forEach((button: ButtonBarButton) => {
-                if (button.leftIcon && button.leftIconSrc) {
-                    throw new Error('do not use both leftIcon & leftIconSrc');
-                } else if (button.rightIcon && button.rightIconSrc) {
-                    throw new Error('do not use both rightIcon & rightIconSrc');
+                if (button.icon && button.iconSrc) {
+                    throw new Error('do not use both icon & iconSrc');
+                }
+                if (button.default) {
+                    this.activateButton(button);
+                    if (foundDefault) {
+                        throw new Error('more than one default button');
+                    } else {
+                        foundDefault = true;
+                    }
                 }
             });
         }
     }
 
     public commonCB(button: ButtonBarButton): void {
+        this.activateButton(button);
+        button.clickCB();
+    }
+
+
+    private activateButton(button: ButtonBarButton): void {
         if (this.radio) {
             this.buttons.forEach((candidateButton: ButtonBarButton) => {
                 candidateButton.active = (candidateButton === button);
-
                 if (candidateButton.active) {
                     console.log('active: ', button);
                 }
             });
         }
-        button.clickCB();
     }
-
 }

@@ -13,19 +13,19 @@ export class HomePage implements OnInit {
     public message: string = 'Last click = (none)';
     public bar1Buttons: ButtonBarButton[] = [
         {
+            default: true,
             text: 'Tab 1',
-            leftIcon: 'triangle',
+            icon: 'triangle',
             clickCB: (): void => { this.message = 'Last click = Tab 1'; }
         },
         {
             text: 'Tab 2',
-            leftIcon: 'ellipse',
-            rightIcon: 'square',
+            icon: 'ellipse',
             clickCB: (): void => { this.message = 'Last click = Tab 2'; }
         },
         {
             text: 'Tab 3',
-            leftIcon: 'square',
+            icon: 'square',
             clickCB: (): void => { this.message = 'Last click = Tab 3'; }
         }
     ];
