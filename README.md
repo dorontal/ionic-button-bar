@@ -15,7 +15,7 @@ To run the app:
   > yarn start
   ```
 To use the component:
-* Add the button-bar component's folder (`./src/app/components/button-bar`)
+* Add the `button-bar` component's folder (`./src/app/components/button-bar`)
 to your app
 * Add to the module file of the component (or page) that uses `button-bar` a
   new import - `ButtonBarModule` - in the `imports` section - see how this
