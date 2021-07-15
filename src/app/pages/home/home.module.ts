@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { HomePage } from './home.page';
-import { ButtonBarModule } from '../button-bar/button-bar.module';
+import { ButtonBarModule } from '../../components/button-bar/button-bar.module';
 
 @NgModule({
     imports: [

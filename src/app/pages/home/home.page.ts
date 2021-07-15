@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import {
     ButtonBarButton
-} from '../button-bar/button-bar.component';
+} from '../../components/button-bar/button-bar.component';
 
 @Component({
     selector: 'app-home',

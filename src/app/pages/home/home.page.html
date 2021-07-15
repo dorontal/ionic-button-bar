@@ -1,0 +1,19 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Home</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <p>
+        The bottom row of buttons in this page is an example of the
+        button-bar component - this is not a skeleton Ionic "tabs"
+        app, with its usual tab-bar on the bottom, but this button-bar
+        tries to play tab-bar on your screen.
+    </p>
+    <h1>{{ message }}</h1>
+</ion-content>
+
+<ion-footer>
+    <app-button-bar [radio]="true" [buttons]="bar1Buttons"></app-button-bar>
+</ion-footer>
