@@ -38,7 +38,9 @@ export class ButtonBarComponent implements OnChanges {
                     throw new Error('do not use both icon & iconSrc');
                 }
                 if (button.default) {
-                    this.activateButton(button);
+                    if (this.radio) {
+                        this.activateRadioButton(button);
+                    }
                     if (foundDefault) {
                         throw new Error('more than one default button');
                     } else {
@@ -50,18 +52,18 @@ export class ButtonBarComponent implements OnChanges {
     }
 
     public commonCB(button: ButtonBarButton): void {
-        this.activateButton(button);
+        if (this.radio) {
+            this.activateRadioButton(button);
+        }
         button.clickCB();
     }
 
-    private activateButton(button: ButtonBarButton): void {
-        if (this.radio) {
-            this.buttons.forEach((candidateButton: ButtonBarButton) => {
-                candidateButton.active = (candidateButton === button);
-                if (candidateButton.active) {
-                    console.log('active: ', button);
-                }
-            });
-        }
+    private activateRadioButton(button: ButtonBarButton): void {
+        this.buttons.forEach((candidateButton: ButtonBarButton) => {
+            candidateButton.active = (candidateButton === button);
+            if (candidateButton.active) {
+                console.log('active: ', button);
+            }
+        });
     }
 }
