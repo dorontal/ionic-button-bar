@@ -20,9 +20,8 @@ to your app
 * Add to the module file of the component (or page) that uses `button-bar` a
   new import - `ButtonBarModule` - in the `imports` section - see how this
   is done in the `./src/app/pages/home/home.module.ts` of this app
-
-In the template, you'll be able to refer to the component as
-`app-button-bar`, for example, from `home.page.html` in this app:
-```html
-    <app-button-bar [radio]="true" [buttons]="bar1Buttons"></app-button-bar>
-```
+* In the template, you'll be able to refer to the component as
+  `app-button-bar`, for example, from `home.page.html` in this app:
+  ```html
+      <app-button-bar [radio]="true" [buttons]="bar1Buttons"></app-button-bar>
+  ```
