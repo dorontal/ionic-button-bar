@@ -7,11 +7,11 @@ To run the app:
 * clone this repository and go to its directory in your command line shell
   ```bash
   > git clone https://github.com/dorontal/ionic-button-bar
-  ...
+
   > cd ionic-button-bar
-  ...
+
   > yarn
-  ...
+
   > yarn start
   ```
 To use the component:
