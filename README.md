@@ -9,7 +9,7 @@ To run the app:
   > git clone https://github.com/dorontal/ionic-
 
 * `yarn`
-* 
+* `yarn start`
 
 To use the component:
 * Add its folder (`./src/app/components/button-bar`)
