@@ -1,4 +1,6 @@
 # ionic-button-bar
+A simple "row of buttons" component.
+
 Demonstration of an Angular / Ionic component that creates a button bar similar in appearance to the tab-bar but containing just buttons.
 
 To use the component:
