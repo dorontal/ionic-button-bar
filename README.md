@@ -4,7 +4,7 @@ A simple "row of buttons" component.
 Demonstration of an Angular / Ionic component that creates a button bar similar in appearance to the tab-bar but containing just buttons.
 
 To run the app:
-* clone this repository and go to its directory in your command line shell
+* In the shell, type
   ```bash
   > git clone https://github.com/dorontal/ionic-button-bar
 
