@@ -8,7 +8,8 @@ to your app
   new import - `ButtonBarModule` - in the `imports` section - see how this
   is done in the `./src/app/pages/home/home.module.ts` of this app
 
-You'll be able to refer to the component as `app-button-bar`, e.g, from `home.page.html`:
+You'll be able to refer to the component as `app-button-bar`, for
+example, in `home.page.html`:
 ```html
     <app-button-bar [radio]="true" [buttons]="bar1Buttons"></app-button-bar>
 ```

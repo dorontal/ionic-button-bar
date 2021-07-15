@@ -54,7 +54,6 @@ export class ButtonBarComponent implements OnChanges {
         button.clickCB();
     }
 
-
     private activateButton(button: ButtonBarButton): void {
         if (this.radio) {
             this.buttons.forEach((candidateButton: ButtonBarButton) => {

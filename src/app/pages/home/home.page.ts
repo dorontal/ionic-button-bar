@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import {
     ButtonBarButton
@@ -9,7 +9,7 @@ import {
     templateUrl: './home.page.html',
     styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage {
     public message: string = 'Last click = (none)';
     public bar1Buttons: ButtonBarButton[] = [
         {
@@ -29,10 +29,4 @@ export class HomePage implements OnInit {
             clickCB: (): void => { this.message = 'Last click = Tab 3'; }
         }
     ];
-
-    constructor() { }
-
-    ngOnInit() {
-    }
-
 }
