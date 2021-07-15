@@ -10,7 +10,7 @@ import {
     styleUrls: ['./home.page.scss'],
 })
 export class HomePage {
-    public message: string = 'Last click = (none)';
+    public message: string = 'Last button click = (none)';
     public bar1Buttons: ButtonBarButton[] = [
         {
             default: true,
