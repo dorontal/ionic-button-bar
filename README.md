@@ -6,11 +6,14 @@ Demonstration of an Angular / Ionic component that creates a button bar similar 
 To run the app:
 * clone this repository and go to its directory in your command line shell
   ```bash
-  > git clone https://github.com/dorontal/ionic-
-
-* `yarn`
-* `yarn start`
-
+  > git clone https://github.com/dorontal/ionic-button-bar
+  ...
+  > cd ionic-button-bar
+  ...
+  > yarn
+  ...
+  > yarn start
+  ```
 To use the component:
 * Add its folder (`./src/app/components/button-bar`)
 to your app
