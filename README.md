@@ -23,5 +23,5 @@ to your app
 * In the template, you'll be able to refer to the component as
   `app-button-bar`, for example, from `home.page.html` in this app:
   ```html
-      <app-button-bar [radio]="true" [buttons]="bar1Buttons"></app-button-bar>
+  <app-button-bar [radio]="true" [buttons]="bar1Buttons"></app-button-bar>
   ```
