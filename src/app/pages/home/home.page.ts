@@ -16,17 +16,17 @@ export class HomePage {
             default: true,
             text: 'Tab 1',
             icon: 'triangle',
-            clickCB: (): void => { this.message = 'Last click = Tab 1'; }
+            clickCB: (): void => { this.message = 'Last button click = Tab 1'; }
         },
         {
             text: 'Tab 2',
             icon: 'ellipse',
-            clickCB: (): void => { this.message = 'Last click = Tab 2'; }
+            clickCB: (): void => { this.message = 'Last button click = Tab 2'; }
         },
         {
             text: 'Tab 3',
             icon: 'square',
-            clickCB: (): void => { this.message = 'Last click = Tab 3'; }
+            clickCB: (): void => { this.message = 'Last button click = Tab 3'; }
         }
     ];
 }
