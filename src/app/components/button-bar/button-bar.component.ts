@@ -32,7 +32,7 @@ export class ButtonBarComponent implements OnChanges {
     public ngOnChanges(changes: SimpleChanges): void {
         if (changes.buttons && this.buttons) {
             this.buttonWidth = (100 / this.buttons.length).toString() + '%';
-            let nDefaultRadio: number = 0;
+            let nDefaultButtons: number = 0;
             this.buttons.forEach((button: ButtonBarButton) => {
                 if (button.icon && button.iconSrc) {
                     throw new Error('do not use both icon & iconSrc');
@@ -41,11 +41,10 @@ export class ButtonBarComponent implements OnChanges {
                     if (this.radio) {
                         this.activateRadioButton(button);
                     }
-                    if (nDefaultRadio > 1) {
+                    if (nDefaultButtons > 1) {
                         throw new Error('more than one default radio button');
-                    } else {
-                        nDefaultRadio++;
                     }
+                    nDefaultButtons++;
                 }
             });
         }
