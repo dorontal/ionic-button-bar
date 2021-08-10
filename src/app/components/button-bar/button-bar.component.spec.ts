@@ -9,14 +9,14 @@ import { ButtonBarComponent } from './button-bar.component';
 
 @Component({
     selector: 'host-component',
-    template: 
+    template:
     '<div><app-button-bar [buttons]="hostButtons"></app-button-bar></div>'
 })
 export class TestHostComponent {
     // using viewChild we get access to the ButtonBarComponent which is a
     // child of TestHostComponent
-    @ViewChild(ButtonBarComponent) 
-    public buttonBarComponent: any;
+    @ViewChild(ButtonBarComponent)
+    public buttonBar: ButtonBarComponent;
     public hostButtons: any = [{
         text: 'Button text',
         icon: 'folder-open',
@@ -24,42 +24,28 @@ export class TestHostComponent {
         disabledCB: () => false
     }];
 }
-/*
+
 describe('ButtonBarComponent', () => {
-    let component: ButtonBarComponent;
-    let fixture: ComponentFixture<ButtonBarComponent>;
+    // let component: ButtonBarComponent;
+    // let fixture: ComponentFixture<ButtonBarComponent>;
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ ButtonBarComponent ],
+            declarations: [ ButtonBarComponent, TestHostComponent ],
             imports: [IonicModule.forRoot()]
-        }).compileComponents();
+        }); //.compileComponents();
     }));
 
-    beforeEach(() => {
-        fixture = TestBed.createComponent(ButtonBarComponent);
-        component = fixture.componentInstance;
-        component.buttons = BUTTONS1;
-        fixture.detectChanges();
-    });
-
-    it('should create', () => {
+    it('should call ngOnChanges', ()=> {
+        const fixture = TestBed.createComponent(TestHostComponent);
+        const hostComponent = fixture.componentInstance;
+        // hostComponent.valueFromHost = 'Test';
+        const component = hostComponent.buttonBar;
         expect(component).toBeTruthy();
-    });
-
-    it('should correctly render buttons', () => {
-        expect(component.buttons).toBeTruthy();
-        let span = fixture.nativeElement.querySelector('span');
-        expect(span.textContent).toContain(BUTTONS1_TEXT);
-    });
-
-    it('should correctly re-render buttons', () => {
-        component.buttons = BUTTONS2;
+        console.log(component);
+        /*
+        spyOn(component, 'ngOnChanges').and.callThrough();
         fixture.detectChanges();
-        let span = fixture.nativeElement.querySelector('span');
-        expect(span.textContent).toContain(BUTTONS2_TEXT);
+        expect(component.ngOnChanges).toHaveBeenCalled();
+        */
     });
-
-
-
 });
-*/
