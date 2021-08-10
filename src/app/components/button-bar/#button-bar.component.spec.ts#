@@ -24,13 +24,13 @@ export class TestHostComponent {
         disabledCB: () => false
     }];
 }
-/*
+
 describe('ButtonBarComponent', () => {
     let component: ButtonBarComponent;
     let fixture: ComponentFixture<ButtonBarComponent>;
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ ButtonBarComponent ],
+            declarations: [ ButtonBarComponent, TestHostComponent ],
             imports: [IonicModule.forRoot()]
         }).compileComponents();
     }));
