@@ -25,12 +25,12 @@ describe('ButtonBarComponent', () => {
     });
 
     it('should correctly render buttons', () => {
-        component.buttons = {
-            text: 'buttton1',
-            icon: 'folder-open',
-            clickCB: (): void => console.log('test'),
-            disabledCB: (): void => console.log('test')
-        }
-    });
-
+        component.buttons = [
+            {
+                text: 'buttton1',
+                icon: 'folder-open',
+                clickCB: () => console.log('test'),
+                disabledCB: () => false
+            }
+        ]});
 });

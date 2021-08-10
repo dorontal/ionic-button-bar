@@ -1,13 +1,13 @@
 import { OnChanges, SimpleChanges, Component, Input } from '@angular/core';
 
 export interface ButtonBarButton {
+    text: string;
     icon?: string;
     rightIcon?: string;
     iconSrc?: string;
     rightIconSrc?: string;
     active?: boolean;
-    default?: boolean;
-    text: string;
+    defaultRadio?: boolean;
     clickCB?: () => void;
     disabledCB?: () => boolean;
 }
@@ -32,19 +32,19 @@ export class ButtonBarComponent implements OnChanges {
     public ngOnChanges(changes: SimpleChanges): void {
         if (changes.buttons && this.buttons) {
             this.buttonWidth = (100 / this.buttons.length).toString() + '%';
-            let foundDefault: boolean = false;
+            let nDefaultRadio: number = 0;
             this.buttons.forEach((button: ButtonBarButton) => {
                 if (button.icon && button.iconSrc) {
                     throw new Error('do not use both icon & iconSrc');
                 }
-                if (button.default) {
+                if (button.defaultRadio) {
                     if (this.radio) {
                         this.activateRadioButton(button);
                     }
-                    if (foundDefault) {
-                        throw new Error('more than one default button');
+                    if (nDefaultRadio > 1) {
+                        throw new Error('more than one default radio button');
                     } else {
-                        foundDefault = true;
+                        nDefaultRadio++;
                     }
                 }
             });

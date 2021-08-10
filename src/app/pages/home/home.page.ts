@@ -13,7 +13,7 @@ export class HomePage {
     public message: string = 'Last button click = (none)';
     public bar1Buttons: ButtonBarButton[] = [
         {
-            default: true,
+            defaultRadio: true,
             text: 'Tab 1',
             icon: 'triangle',
             clickCB: (): void => { this.message = 'Last button click = Tab 1'; }
