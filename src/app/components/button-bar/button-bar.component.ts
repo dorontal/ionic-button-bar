@@ -7,7 +7,7 @@ export interface ButtonBarButton {
     iconSrc?: string;
     rightIconSrc?: string;
     active?: boolean;
-    defaultRadio?: boolean;
+    selected?: boolean;
     clickCB?: () => void;
     disabledCB?: () => boolean;
 }
@@ -23,7 +23,7 @@ export interface ButtonBarButton {
 })
 export class ButtonBarComponent implements OnChanges {
     @Input() public buttons: ButtonBarButton[];
-    @Input() public radio: boolean = false;
+    @Input() public radioMode: boolean = false;
     public buttonWidth: string;
 
     /**
@@ -32,32 +32,34 @@ export class ButtonBarComponent implements OnChanges {
     public ngOnChanges(changes: SimpleChanges): void {
         if (changes.buttons && this.buttons) {
             this.buttonWidth = (100 / this.buttons.length).toString() + '%';
-            let nDefaultButtons: number = 0;
+            let nSelectedRadioButtons: number = 0;
             this.buttons.forEach((button: ButtonBarButton) => {
                 if (button.icon && button.iconSrc) {
-                    throw new Error('do not use both icon & iconSrc');
+                    throw new Error('one of icon & iconSrc must be null');
                 }
-                if (button.defaultRadio) {
-                    if (this.radio) {
-                        this.activateRadioButton(button);
+                if (button.selected) {
+                    if (this.radioMode) {
+                        this.activateRadioModeButton(button);
+                    } else {
+                        throw new Error('not radio mode but button selected');
                     }
-                    if (nDefaultButtons > 1) {
-                        throw new Error('more than one default radio button');
+                    if (nSelectedRadioButtons > 1) {
+                        throw new Error('> 1 selected radio button');
                     }
-                    nDefaultButtons++;
+                    nSelectedRadioButtons++;
                 }
             });
         }
     }
 
     public commonCB(button: ButtonBarButton): void {
-        if (this.radio) {
-            this.activateRadioButton(button);
+        if (this.radioMode) {
+            this.activateRadioModeButton(button);
         }
         button.clickCB();
     }
 
-    private activateRadioButton(button: ButtonBarButton): void {
+    private activateRadioModeButton(button: ButtonBarButton): void {
         this.buttons.forEach((candidateButton: ButtonBarButton) => {
             candidateButton.active = (candidateButton === button);
             if (candidateButton.active) {
