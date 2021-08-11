@@ -63,24 +63,21 @@ describe('ButtonBarComponent init w/a host component', () => {
         const buttonBarComponent = hostComponent.buttonBar;
         spyOn(buttonBarComponent, 'commonCB').and.callThrough();
 
-        // const button = buttonBarComponent.buttons[0];
-        // spyOn(button, 'clickCB');
+        const button = buttonBarComponent.buttons[0];
+        spyOn(button, 'clickCB');
 
         const ionButtonElement1 = hostFixture.debugElement.nativeElement
               .querySelector('ion-button');
-        // console.log('1', ionButtonElement1);
         ionButtonElement1.click();
-        /*
-        const ionButtonElement2 = hostFixture.debugElement.queryAll(
-            By.css('ion-button'))[0].nativeNode;
-        console.log('2', ionButtonElement2);
-        ionButtonElement2.click();
-        console.log(ionButtonElement1 === ionButtonElement2);
-        */
+        // const ionButtonElement2 = hostFixture.debugElement.queryAll(
+        //     By.css('ion-button'))[0].nativeNode;
+        // ionButtonElement2.click();
+        // console.log(ionButtonElement1 === ionButtonElement2);
+
         hostFixture.detectChanges();
         hostFixture.whenStable().then(() => {
             expect(buttonBarComponent.commonCB).toHaveBeenCalled();
-            // expect(button.clickCB).toHaveBeenCalled();
+            expect(button.clickCB).toHaveBeenCalled();
         });
     }));
 
