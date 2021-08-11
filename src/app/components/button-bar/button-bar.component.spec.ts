@@ -8,7 +8,7 @@ import { ButtonBarComponent } from './button-bar.component';
 // See https://stackoverflow.com/questions/37408801/ for testing ngOnChanges
 
 @Component({
-    selector: 'host-component',
+    selector: 'app-host-component',
     template: `<div>
                    <app-button-bar [buttons]="buttons" [radioMode]="radioMode">
                    </app-button-bar>
@@ -96,7 +96,7 @@ describe('ButtonBarComponent init w/a host component', () => {
         };
         expect(errorThrowingFunction).toThrow();
     });
-    
+
     it('should fail if selected when not in radio mode', ()=> {
         const errorThrowingFunction = () => {
             hostComponent.radioMode = false;
@@ -105,7 +105,7 @@ describe('ButtonBarComponent init w/a host component', () => {
         };
         expect(errorThrowingFunction).toThrow();
     });
-    
+
     it('should fail on > 1 radioMode buttons selected', ()=> {
         const errorThrowingFunction = () => {
             hostComponent.radioMode = true;

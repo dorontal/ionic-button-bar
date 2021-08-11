@@ -25,7 +25,7 @@ describe('HomePage', () => {
     });
 
     it('should run the callbacks', () => {
-        
+
 
 
 
