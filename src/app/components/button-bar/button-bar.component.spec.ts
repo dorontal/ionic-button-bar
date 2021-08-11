@@ -61,7 +61,7 @@ describe('ButtonBarComponent init w/a host component', () => {
         hostFixture.detectChanges();
 
         const buttonBarComponent = hostComponent.buttonBar;
-        spyOn(buttonBarComponent, 'commonCB');
+        spyOn(buttonBarComponent, 'commonCB').and.callThrough();
 
         // const button = buttonBarComponent.buttons[0];
         // spyOn(button, 'clickCB');
