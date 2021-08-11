@@ -63,9 +63,9 @@ export class ButtonBarComponent implements OnChanges {
         // TODO: use map() here
         this.buttons.forEach((candidateButton: ButtonBarButton) => {
             candidateButton.active = (candidateButton === button);
-            if (candidateButton.active) {
-                console.log('active: ', button);
-            }
+            // if (candidateButton.active) {
+            //     console.log('active: ', button);
+            // }
         });
     }
 }

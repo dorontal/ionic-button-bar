@@ -41,7 +41,7 @@ describe('ButtonBarComponent init w/a host component', () => {
         hostComponent.buttons = [{
             text: 'Button text',
             icon: 'folder-open',
-            clickCB: () => console.log('test'),
+            clickCB: () => console.log('clicked'),
             disabledCB: () => false
         }];
         const buttonBarComponent = hostComponent.buttonBar;
@@ -50,14 +50,35 @@ describe('ButtonBarComponent init w/a host component', () => {
         expect(buttonBarComponent.ngOnChanges).toHaveBeenCalled();
     });
 
-    it('should err on wrong button config w/both icon & imgSrc', ()=> {
+    it('should call commonCB() and clickCB() when a button is clicked', ()=> {
+        hostComponent.buttons = [{
+            text: 'Button text',
+            icon: 'folder-open',
+            clickCB: () => console.log('clicked'),
+            disabledCB: () => false
+        }];
+        hostFixture.detectChanges();
+        const buttonBarComponent = hostComponent.buttonBar;
+        spyOn(buttonBarComponent, 'commonCB');
+        spyOn(hostComponent.buttons[0], 'clickCB');
+        const button = hostFixture.debugElement.nativeElement
+              .querySelector('app-button-bar').children[0]
+              .querySelector('ion-button');
+        button.click();
+        hostFixture.whenStable().then(() => {
+            expect(buttonBarComponent.commonCB).toHaveBeenCalled();
+            expect(hostComponent.buttons[0].clickCB).toHaveBeenCalled();
+        });
+    });
+
+    it('should fail on wrong button config w/both icon & imgSrc', ()=> {
         const errorThrowingFunction = () => {
             hostComponent.buttons = [
                 {
                     text: 'Button text',
                     icon: 'folder-open',
                     iconSrc: 'some/path',
-                    clickCB: () => console.log('test'),
+                    clickCB: () => console.log('clicked'),
                     disabledCB: () => false
                 }
             ];
@@ -69,13 +90,14 @@ describe('ButtonBarComponent init w/a host component', () => {
     it('should fail if selected when not in radio mode', ()=> {
         const errorThrowingFunction = () => {
             hostComponent.radioMode = false;
-            hostComponent.buttons = [ { text: 'button text', selected: true } ];
+            hostComponent.buttons = [{ text: 'button', selected: true }];
+
             hostFixture.detectChanges();
         };
         expect(errorThrowingFunction).toThrow();
     });
 
-    it('should err on > 1 radioMode buttons selected', ()=> {
+    it('should fail on > 1 radioMode buttons selected', ()=> {
         const errorThrowingFunction = () => {
             hostComponent.radioMode = true;
             hostComponent.buttons = [
@@ -94,32 +116,3 @@ describe('ButtonBarComponent init w/a host component', () => {
     });
 
 });
-
-/*
-describe('ButtonBarComponent', () => {
-    let fixture: ComponentFixture<ButtonBarComponent>;
-    let component: ButtonBarComponent;
-
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [ ButtonBarComponent ],
-            imports: [ IonicModule.forRoot() ]
-        }).compileComponents();
-        fixture = TestBed.createComponent(ButtonBarComponent);
-        component = fixture.componentInstance;
-    }));
-    
-    it('should call commonCB() on button click', waitForAsync(() => {
-        spyOn(component, 'commonCB');
-
-        component.buttons = [{ text: 'Button text' }];
-        fixture.detectChanges();
-        let button = fixture.debugElement.nativeElement.querySelector('button');
-        button.click();
-        
-        fixture.whenStable().then(() => {
-            expect(component.commonCB).toHaveBeenCalled();
-        });
-    }));
-});
-*/
