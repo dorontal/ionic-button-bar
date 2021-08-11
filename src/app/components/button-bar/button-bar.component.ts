@@ -55,6 +55,7 @@ export class ButtonBarComponent implements OnChanges {
 
     public commonCB(button: ButtonBarButton): void {
         console.log('dude 1');
+        throw Error('gotcha!');
         if (this.radioMode) {
             this.selectRadioButton(button);
         }

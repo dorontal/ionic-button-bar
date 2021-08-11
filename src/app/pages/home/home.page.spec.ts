@@ -11,8 +11,8 @@ describe('HomePage', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ HomePage ],
-            imports: [ IonicModule.forRoot() ]//,
-            // schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+            imports: [ IonicModule.forRoot() ],
+            schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
         }).compileComponents();
 
         fixture = TestBed.createComponent(HomePage);
@@ -23,5 +23,17 @@ describe('HomePage', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
+
+    it('should run the callbacks', () => {
+        
+
+
+
+
+
+
+        expect(component).toBeTruthy();
+    });
+
 
 });

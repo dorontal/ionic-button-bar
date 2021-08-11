@@ -68,9 +68,8 @@ describe('ButtonBarComponent init w/a host component', () => {
 
         const ionButtonElement1 = hostFixture.debugElement.nativeElement
               .querySelector('ion-button');
-        console.log('1', ionButtonElement1);
+        // console.log('1', ionButtonElement1);
         ionButtonElement1.click();
-        hostFixture.detectChanges();
         /*
         const ionButtonElement2 = hostFixture.debugElement.queryAll(
             By.css('ion-button'))[0].nativeNode;
