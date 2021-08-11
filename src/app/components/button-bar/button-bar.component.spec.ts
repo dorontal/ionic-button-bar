@@ -16,38 +16,41 @@ class HostComponent {
     // child of HostComponent
     @ViewChild(ButtonBarComponent) public buttonBar: ButtonBarComponent;
     public buttons: any;
-
-    constructor() {
-        console.warn('buttonBar: ', JSON.stringify(this.buttonBar, null, 2));
-    }
-
 }
 
 describe('ButtonBarComponent', () => {
+    let component: HostComponent;
+    let fixture: ComponentFixture<HostComponent>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ ButtonBarComponent, HostComponent ],
             imports: [ IonicModule.forRoot() ],
             schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
-        }).compileComponents(); // });
+        }).compileComponents();        
+        fixture = TestBed.createComponent(HostComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
     }));
 
+    it('should create', ()=> {
+        expect(component).toBeTruthy();
+    });
+
     it('should call ngOnChanges', ()=> {
-        const fixture = TestBed.createComponent(HostComponent);
-        const hostComponent = fixture.componentInstance;
-        fixture.detectChanges();
-        hostComponent.buttons = [{
+        // const fixture = TestBed.createComponent(HostComponent);
+        // const hostComponent = fixture.componentInstance;
+        // fixture.detectChanges();
+        component.buttons = [{
             text: 'Button text',
             icon: 'folder-open',
             clickCB: () => console.log('test'),
             disabledCB: () => false
         }];
-        const component = hostComponent.buttonBar;
-        console.log(component);
-        spyOn(component, 'ngOnChanges').and.callThrough();
+        const childComponent = component.buttonBar;
+        console.log(childComponent);
+        spyOn(childComponent, 'ngOnChanges').and.callThrough();
         fixture.detectChanges();
-        expect(component.ngOnChanges).toHaveBeenCalled();
+        expect(childComponent.ngOnChanges).toHaveBeenCalled();
     });
-
 });
