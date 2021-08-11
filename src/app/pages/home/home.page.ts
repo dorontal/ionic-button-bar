@@ -11,7 +11,7 @@ import {
 })
 export class HomePage {
     public message: string = 'Last button click = (none)';
-    public bar1Buttons: ButtonBarButton[] = [
+    public footerButtons: ButtonBarButton[] = [
         {
             selected: true,
             text: 'Tab 1',

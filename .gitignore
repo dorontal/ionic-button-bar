@@ -1,6 +1,8 @@
 # Specifies intentionally untracked files to ignore when using Git
 # http://git-scm.com/docs/gitignore
 
+# /coverage
+
 *~
 *.sw[mnpcod]
 .tmp
@@ -23,7 +25,6 @@ npm-debug.log*
 /.sourcemaps
 /.versions
 /.vscode
-/coverage
 /dist
 /node_modules
 /platforms
