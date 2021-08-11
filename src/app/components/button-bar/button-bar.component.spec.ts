@@ -33,7 +33,7 @@ describe('ButtonBarComponent', () => {
         expect(hostComponent).toBeTruthy();
     });
 
-    it('should call ngOnChanges', ()=> {
+    it('should call ngOnChanges after button assignment', ()=> {
         hostComponent.buttons = [{
             text: 'Button text',
             icon: 'folder-open',
@@ -45,4 +45,19 @@ describe('ButtonBarComponent', () => {
         hostFixture.detectChanges();
         expect(buttonBarComponent.ngOnChanges).toHaveBeenCalled();
     });
+
+    it('should err on wrong button config w/both icon & imgSrc', ()=> {
+        const errorThrowingFunction = () => {
+            hostComponent.buttons = [{
+                text: 'Button text',
+                icon: 'folder-open',
+                iconSrc: 'some/path',
+                clickCB: () => console.log('test'),
+                disabledCB: () => false
+            }];
+            hostFixture.detectChanges();
+        };
+        expect(errorThrowingFunction).toThrow();
+    });
+
 });
