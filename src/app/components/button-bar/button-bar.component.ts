@@ -39,7 +39,7 @@ export class ButtonBarComponent implements OnChanges {
                 }
                 if (button.selected) {
                     if (this.radioMode) {
-                        this.activateRadioModeButton(button);
+                        this.selectRadioButton(button);
                     } else {
                         throw new Error('not radio mode but button selected');
                     }
@@ -54,12 +54,13 @@ export class ButtonBarComponent implements OnChanges {
 
     public commonCB(button: ButtonBarButton): void {
         if (this.radioMode) {
-            this.activateRadioModeButton(button);
+            this.selectRadioButton(button);
         }
         button.clickCB();
     }
 
-    private activateRadioModeButton(button: ButtonBarButton): void {
+    private selectRadioButton(button: ButtonBarButton): void {
+        // TODO: use map() here
         this.buttons.forEach((candidateButton: ButtonBarButton) => {
             candidateButton.active = (candidateButton === button);
             if (candidateButton.active) {
