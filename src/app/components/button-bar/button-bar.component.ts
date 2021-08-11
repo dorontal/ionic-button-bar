@@ -38,6 +38,7 @@ export class ButtonBarComponent implements OnChanges {
                     throw new Error('one of icon & iconSrc must be null');
                 }
                 if (button.selected) {
+                    nSelectedRadioButtons++;
                     if (this.radioMode) {
                         this.selectRadioButton(button);
                     } else {
@@ -46,7 +47,6 @@ export class ButtonBarComponent implements OnChanges {
                     if (nSelectedRadioButtons > 1) {
                         throw new Error('> 1 selected radio button');
                     }
-                    nSelectedRadioButtons++;
                 }
             });
         }

@@ -8,14 +8,18 @@ import { ButtonBarComponent } from './button-bar.component';
 
 @Component({
     selector: 'host-component',
-    template: '<div><app-button-bar [buttons]="buttons"></app-button-bar></div>'
+    template: `<div>
+                   <app-button-bar [buttons]="buttons" [radioMode]="radioMode">
+                   </app-button-bar>
+               </div>`
 })
 class HostComponent {
     @ViewChild(ButtonBarComponent) public buttonBar: ButtonBarComponent;
+    public radioMode: boolean = false;
     public buttons: any;
 }
 
-describe('ButtonBarComponent', () => {
+describe('ButtonBarComponent init w/a host component', () => {
     let hostComponent: HostComponent;
     let hostFixture: ComponentFixture<HostComponent>;
 
@@ -48,16 +52,74 @@ describe('ButtonBarComponent', () => {
 
     it('should err on wrong button config w/both icon & imgSrc', ()=> {
         const errorThrowingFunction = () => {
-            hostComponent.buttons = [{
-                text: 'Button text',
-                icon: 'folder-open',
-                iconSrc: 'some/path',
-                clickCB: () => console.log('test'),
-                disabledCB: () => false
-            }];
+            hostComponent.buttons = [
+                {
+                    text: 'Button text',
+                    icon: 'folder-open',
+                    iconSrc: 'some/path',
+                    clickCB: () => console.log('test'),
+                    disabledCB: () => false
+                }
+            ];
+            hostFixture.detectChanges();
+        };
+        expect(errorThrowingFunction).toThrow();
+    });
+
+    it('should fail if selected when not in radio mode', ()=> {
+        const errorThrowingFunction = () => {
+            hostComponent.radioMode = false;
+            hostComponent.buttons = [ { text: 'button text', selected: true } ];
+            hostFixture.detectChanges();
+        };
+        expect(errorThrowingFunction).toThrow();
+    });
+
+    it('should err on > 1 radioMode buttons selected', ()=> {
+        const errorThrowingFunction = () => {
+            hostComponent.radioMode = true;
+            hostComponent.buttons = [
+                {
+                    text: 'Button1 text',
+                    selected: true
+                },
+                {
+                    text: 'Button2 text',
+                    selected: true
+                }
+            ];
             hostFixture.detectChanges();
         };
         expect(errorThrowingFunction).toThrow();
     });
 
 });
+
+/*
+describe('ButtonBarComponent', () => {
+    let fixture: ComponentFixture<ButtonBarComponent>;
+    let component: ButtonBarComponent;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [ ButtonBarComponent ],
+            imports: [ IonicModule.forRoot() ]
+        }).compileComponents();
+        fixture = TestBed.createComponent(ButtonBarComponent);
+        component = fixture.componentInstance;
+    }));
+    
+    it('should call commonCB() on button click', waitForAsync(() => {
+        spyOn(component, 'commonCB');
+
+        component.buttons = [{ text: 'Button text' }];
+        fixture.detectChanges();
+        let button = fixture.debugElement.nativeElement.querySelector('button');
+        button.click();
+        
+        fixture.whenStable().then(() => {
+            expect(component.commonCB).toHaveBeenCalled();
+        });
+    }));
+});
+*/
