@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { Component, OnChanges, Input, ViewChild } from '@angular/core';
-// import { By } from '@angular/platform-browser';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnChanges, Input, ViewChild } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 
 import { ButtonBarComponent } from './button-bar.component';
@@ -10,42 +9,45 @@ import { ButtonBarComponent } from './button-bar.component';
 @Component({
     selector: 'host-component',
     template:
-    '<div><app-button-bar [buttons]="hostButtons"></app-button-bar></div>'
+    '<div><app-button-bar [buttons]="buttons"></app-button-bar></div>'
 })
-export class TestHostComponent {
+class HostComponent {
     // using viewChild we get access to the ButtonBarComponent which is a
-    // child of TestHostComponent
-    @ViewChild(ButtonBarComponent)
-    public buttonBar: ButtonBarComponent;
-    public hostButtons: any = [{
-        text: 'Button text',
-        icon: 'folder-open',
-        clickCB: () => console.log('test'),
-        disabledCB: () => false
-    }];
+    // child of HostComponent
+    @ViewChild(ButtonBarComponent) public buttonBar: ButtonBarComponent;
+    public buttons: any;
+
+    constructor() {
+        console.warn('buttonBar: ', JSON.stringify(this.buttonBar, null, 2));
+    }
+
 }
 
 describe('ButtonBarComponent', () => {
-    // let component: ButtonBarComponent;
-    // let fixture: ComponentFixture<ButtonBarComponent>;
+
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ ButtonBarComponent, TestHostComponent ],
-            imports: [IonicModule.forRoot()]
-        }); //.compileComponents();
+            declarations: [ ButtonBarComponent, HostComponent ],
+            imports: [ IonicModule.forRoot() ],
+            schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+        }).compileComponents(); // });
     }));
 
     it('should call ngOnChanges', ()=> {
-        const fixture = TestBed.createComponent(TestHostComponent);
+        const fixture = TestBed.createComponent(HostComponent);
         const hostComponent = fixture.componentInstance;
-        // hostComponent.valueFromHost = 'Test';
+        fixture.detectChanges();
+        hostComponent.buttons = [{
+            text: 'Button text',
+            icon: 'folder-open',
+            clickCB: () => console.log('test'),
+            disabledCB: () => false
+        }];
         const component = hostComponent.buttonBar;
-        expect(component).toBeTruthy();
         console.log(component);
-        /*
         spyOn(component, 'ngOnChanges').and.callThrough();
         fixture.detectChanges();
         expect(component.ngOnChanges).toHaveBeenCalled();
-        */
     });
+
 });
