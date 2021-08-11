@@ -1,3 +1,4 @@
+import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, OnChanges, Input, ViewChild } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
@@ -50,7 +51,7 @@ describe('ButtonBarComponent init w/a host component', () => {
         expect(buttonBarComponent.ngOnChanges).toHaveBeenCalled();
     });
 
-    it('should call commonCB() and clickCB() when a button is clicked', ()=> {
+    it('should call commonCB/clickCB on button click', waitForAsync(() => {
         hostComponent.buttons = [{
             text: 'Button text',
             icon: 'folder-open',
@@ -58,18 +59,31 @@ describe('ButtonBarComponent init w/a host component', () => {
             disabledCB: () => false
         }];
         hostFixture.detectChanges();
+
         const buttonBarComponent = hostComponent.buttonBar;
         spyOn(buttonBarComponent, 'commonCB');
-        spyOn(hostComponent.buttons[0], 'clickCB');
-        const button = hostFixture.debugElement.nativeElement
-              .querySelector('app-button-bar').children[0]
+
+        // const button = buttonBarComponent.buttons[0];
+        // spyOn(button, 'clickCB');
+
+        const ionButtonElement1 = hostFixture.debugElement.nativeElement
               .querySelector('ion-button');
-        button.click();
+        console.log('1', ionButtonElement1);
+        ionButtonElement1.click();
+        hostFixture.detectChanges();
+        /*
+        const ionButtonElement2 = hostFixture.debugElement.queryAll(
+            By.css('ion-button'))[0].nativeNode;
+        console.log('2', ionButtonElement2);
+        ionButtonElement2.click();
+        console.log(ionButtonElement1 === ionButtonElement2);
+        */
+        hostFixture.detectChanges();
         hostFixture.whenStable().then(() => {
             expect(buttonBarComponent.commonCB).toHaveBeenCalled();
-            expect(hostComponent.buttons[0].clickCB).toHaveBeenCalled();
+            // expect(button.clickCB).toHaveBeenCalled();
         });
-    });
+    }));
 
     it('should fail on wrong button config w/both icon & imgSrc', ()=> {
         const errorThrowingFunction = () => {
@@ -86,17 +100,16 @@ describe('ButtonBarComponent init w/a host component', () => {
         };
         expect(errorThrowingFunction).toThrow();
     });
-
+    
     it('should fail if selected when not in radio mode', ()=> {
         const errorThrowingFunction = () => {
             hostComponent.radioMode = false;
             hostComponent.buttons = [{ text: 'button', selected: true }];
-
             hostFixture.detectChanges();
         };
         expect(errorThrowingFunction).toThrow();
     });
-
+    
     it('should fail on > 1 radioMode buttons selected', ()=> {
         const errorThrowingFunction = () => {
             hostComponent.radioMode = true;

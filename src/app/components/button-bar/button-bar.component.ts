@@ -30,6 +30,7 @@ export class ButtonBarComponent implements OnChanges {
      * Dynamically change the button bar when the button @Input changes.
      */
     public ngOnChanges(changes: SimpleChanges): void {
+        // console.log('dude 0');
         if (changes.buttons && this.buttons) {
             this.buttonWidth = (100 / this.buttons.length).toString() + '%';
             let nSelectedRadioButtons: number = 0;
@@ -53,6 +54,7 @@ export class ButtonBarComponent implements OnChanges {
     }
 
     public commonCB(button: ButtonBarButton): void {
+        console.log('dude 1');
         if (this.radioMode) {
             this.selectRadioButton(button);
         }
