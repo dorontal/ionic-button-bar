@@ -59,21 +59,13 @@ describe('ButtonBarComponent init w/a host component', () => {
             disabledCB: () => false
         }];
         hostFixture.detectChanges();
-
         const buttonBarComponent = hostComponent.buttonBar;
         spyOn(buttonBarComponent, 'commonCB').and.callThrough();
-
         const button = buttonBarComponent.buttons[0];
         spyOn(button, 'clickCB');
-
-        const ionButtonElement1 = hostFixture.debugElement.nativeElement
+        const ionButtonElement = hostFixture.debugElement.nativeElement
               .querySelector('ion-button');
-        ionButtonElement1.click();
-        // const ionButtonElement2 = hostFixture.debugElement.queryAll(
-        //     By.css('ion-button'))[0].nativeNode;
-        // ionButtonElement2.click();
-        // console.log(ionButtonElement1 === ionButtonElement2);
-
+        ionButtonElement.click();
         hostFixture.detectChanges();
         hostFixture.whenStable().then(() => {
             expect(buttonBarComponent.commonCB).toHaveBeenCalled();
