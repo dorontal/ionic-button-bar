@@ -33,20 +33,21 @@ export class ButtonBarComponent implements OnChanges {
         // console.log('dude 0');
         if (changes.buttons && this.buttons) {
             this.buttonWidth = (100 / this.buttons.length).toString() + '%';
-            let nSelectedRadioButtons: number = 0;
+            let bFoundSelectedButton: boolean = false;
             this.buttons.forEach((button: ButtonBarButton) => {
                 if (button.icon && button.iconSrc) {
                     throw new Error('one of icon & iconSrc must be null');
                 }
                 if (button.selected) {
-                    nSelectedRadioButtons++;
                     if (this.radioMode) {
-                        this.selectRadioButton(button);
+                        if (bFoundSelectedButton) {
+                            throw new Error('>1 selected button in radio mode');
+                        } else {
+                            bFoundSelectedButton = true;
+                        }
+
                     } else {
-                        throw new Error('not radio mode but button selected');
-                    }
-                    if (nSelectedRadioButtons > 1) {
-                        throw new Error('> 1 selected radio button');
+                        throw new Error('only select buttons in radio mode');
                     }
                 }
             });
@@ -55,18 +56,10 @@ export class ButtonBarComponent implements OnChanges {
 
     public commonCB(button: ButtonBarButton): void {
         if (this.radioMode) {
-            this.selectRadioButton(button);
+            this.buttons.forEach((candidateButton: ButtonBarButton) => {
+                candidateButton.active = (candidateButton === button);
+            });
         }
         button.clickCB();
-    }
-
-    private selectRadioButton(button: ButtonBarButton): void {
-        // TODO: use map() here
-        this.buttons.forEach((candidateButton: ButtonBarButton) => {
-            candidateButton.active = (candidateButton === button);
-            // if (candidateButton.active) {
-            //     console.log('active: ', button);
-            // }
-        });
     }
 }

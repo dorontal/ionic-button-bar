@@ -9,10 +9,10 @@ ion-grid.ios {
     ion-row, ion-col {
         margin: 0;
         padding: 0;
-        ion-button.active span {
+        ion-button.selected span {
             color: var(--ion-color-primary);
         }
-        ion-button.inactive span {
+        ion-button.unselected span {
             color: #999;
             .button-inner {
                 width: 100%;
@@ -53,10 +53,10 @@ ion-grid.md {
     ion-row, ion-col {
         margin: 0;
         padding: 0;
-        ion-button.active span {
+        ion-button.selected span {
             color: var(--ion-color-primary);
         }
-        ion-button.inactive span {
+        ion-button.unselected span {
             color: #666;
         }
         ion-button {

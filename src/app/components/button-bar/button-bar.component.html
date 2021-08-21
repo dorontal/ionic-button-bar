@@ -2,7 +2,7 @@
     <ion-row>
         <ion-col *ngFor="let button of buttons" [style.width]="buttonWidth">
             <ion-button fill="clear" expand="full" (click)="commonCB(button)"
-                        [ngClass]="button.active ? 'active' : 'inactive'"
+                        [ngClass]="button.selected ? 'selected' : 'unselected'"
                         [disabled]="button.disabledCB && button.disabledCB()">
                 <span>
                     <ion-icon *ngIf="button.icon && !button.iconSrc"
