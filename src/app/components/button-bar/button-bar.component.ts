@@ -6,7 +6,6 @@ export interface ButtonBarButton {
     rightIcon?: string;
     iconSrc?: string;
     rightIconSrc?: string;
-    active?: boolean;
     selected?: boolean;
     clickCB?: () => void;
     disabledCB?: () => boolean;
@@ -57,7 +56,7 @@ export class ButtonBarComponent implements OnChanges {
     public commonCB(button: ButtonBarButton): void {
         if (this.radioMode) {
             this.buttons.forEach((candidateButton: ButtonBarButton) => {
-                candidateButton.active = (candidateButton === button);
+                candidateButton.selected = (candidateButton === button);
             });
         }
         button.clickCB();
